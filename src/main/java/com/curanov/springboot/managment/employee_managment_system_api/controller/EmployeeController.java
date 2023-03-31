@@ -1,7 +1,6 @@
 package com.curanov.springboot.managment.employee_managment_system_api.controller;
 
 import com.curanov.springboot.managment.employee_managment_system_api.entity.Employee;
-import com.curanov.springboot.managment.employee_managment_system_api.exception.NoSuchEmployeeException;
 import com.curanov.springboot.managment.employee_managment_system_api.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,9 +24,6 @@ public class EmployeeController {
     @GetMapping("/employees/{id}")
     public Employee showEmployee(@PathVariable int id) {
         Employee employee =  employeeService.getEmployee(id);
-
-        if(employee == null)
-            throw new NoSuchEmployeeException("There is no Employee with this ID=" + id + "!");
 
         return employee;
     }
