@@ -17,11 +17,4 @@ public class EmployeeExceptionHandler {
         return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<EmployeeIncorrectData> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
-        EmployeeIncorrectData data = new EmployeeIncorrectData();
-        data.setInfo("Failed to save employee due to data integrity violation.");
-
-        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
-    }
 }

@@ -29,13 +29,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
-        try {
-            Employee savedEmployee = employeeService.saveEmployee(employee);
-            return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
-        } catch (DataIntegrityViolationException ex) {
-            throw new DataIntegrityViolationException("Failed to save employee due to data integrity violation.");
-        }
+    public Employee saveEmployee(@RequestBody Employee employee) {
+        return employeeService.saveEmployee(employee);
     }
 
     @PutMapping("/employees")
