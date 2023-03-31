@@ -2,11 +2,12 @@ package com.curanov.springboot.managment.employee_managment_system_api.service;
 
 import com.curanov.springboot.managment.employee_managment_system_api.dao.EmployeeRepository;
 import com.curanov.springboot.managment.employee_managment_system_api.entity.Employee;
+import com.curanov.springboot.managment.employee_managment_system_api.exception.EmployeeServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeServiceImplementation implements EmployeeService{
@@ -20,14 +21,8 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
     @Override
     public Employee getEmployee(int id) {
-        Employee employee = null;
-        Optional<Employee> optionalEmployee =
-                employeeRepository.findById(id);
-
-        if (optionalEmployee.isPresent()){
-            employee = optionalEmployee.get();
-        }
-        return employee;
+        return employeeRepository.findById(id).orElseThrow(
+                () -> new EmployeeServiceException("Employee with ID:" + id + " not found!"));
     }
 
     @Override
@@ -37,7 +32,10 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
     @Override
     public void deleteEmployee(int id) {
-        employeeRepository.deleteById(id);
+      Employee employee = employeeRepository.findById(id).orElseThrow(
+              () -> new EmployeeServiceException("Cannot Delete Employee with ID: "+ id + ". Employee not found!")
+      );
+      employeeRepository.deleteById(id);
     }
 
     @Override

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class EmployeeExceptionHandler {
 
-    @ExceptionHandler(NoSuchEmployeeException.class)
-    public ResponseEntity<EmployeeIncorrectData> handleException(NoSuchEmployeeException exception) {
+    @ExceptionHandler(EmployeeServiceException.class)
+    public ResponseEntity<EmployeeIncorrectData> handleException(EmployeeServiceException exception) {
         EmployeeIncorrectData data = new EmployeeIncorrectData();
         data.setInfo(exception.getMessage());
 
