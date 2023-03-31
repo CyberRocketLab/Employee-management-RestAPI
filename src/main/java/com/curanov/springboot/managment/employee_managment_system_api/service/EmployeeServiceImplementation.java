@@ -16,6 +16,10 @@ public class EmployeeServiceImplementation implements EmployeeService{
     @Override
     public List<Employee> showAllEmployees() {
         List<Employee> employeeList = employeeRepository.findAll();
+        if (employeeList.isEmpty()) {
+            throw new EmployeeServiceException("The are no Employees in the Database!");
+        }
+
         return employeeList;
     }
 
@@ -32,7 +36,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
     @Override
     public void deleteEmployee(int id) {
-      Employee employee = employeeRepository.findById(id).orElseThrow(
+      employeeRepository.findById(id).orElseThrow(
               () -> new EmployeeServiceException("Cannot Delete Employee with ID: "+ id + ". Employee not found!")
       );
       employeeRepository.deleteById(id);
@@ -42,12 +46,23 @@ public class EmployeeServiceImplementation implements EmployeeService{
     public List<Employee> findAllBySurname(String surname) {
         List<Employee> employeeList =
                 employeeRepository.findAllBySurname(surname);
+
+        if(employeeList.isEmpty()) {
+            throw new EmployeeServiceException("There are no Employees with SURNAME: " + surname);
+        }
+
         return employeeList;
     }
 
     @Override
     public List<Employee> findEmployeeSalaryLessThan(int salary) {
-        return employeeRepository.findAllBySalaryLessThan(salary);
+        List<Employee> employeeList = employeeRepository.findAllBySalaryLessThan(salary);
+
+        if(employeeList.isEmpty()) {
+            throw new EmployeeServiceException("There is no Employee salary less then: " + salary);
+        }
+
+        return employeeList;
     }
 
 
