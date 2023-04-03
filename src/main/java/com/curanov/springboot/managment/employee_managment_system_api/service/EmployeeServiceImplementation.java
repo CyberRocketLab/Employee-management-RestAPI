@@ -3,16 +3,20 @@ package com.curanov.springboot.managment.employee_managment_system_api.service;
 import com.curanov.springboot.managment.employee_managment_system_api.dao.EmployeeRepository;
 import com.curanov.springboot.managment.employee_managment_system_api.entity.Employee;
 import com.curanov.springboot.managment.employee_managment_system_api.exception.EmployeeServiceException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EmployeeServiceImplementation implements EmployeeService {
-    @Autowired
+
     EmployeeRepository employeeRepository;
+
+    public EmployeeServiceImplementation(@Autowired EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public List<Employee> showAllEmployees() {
