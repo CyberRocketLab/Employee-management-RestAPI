@@ -11,8 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
-    @Autowired
+
     EmployeeService employeeService;
+
+    public EmployeeController(@Autowired EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping("/employees")
     public List<Employee> showAllEmployees() {
