@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EmployeeServiceImplementation implements EmployeeService{
+public class EmployeeServiceImplementation implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
+
     @Override
     public List<Employee> showAllEmployees() {
         List<Employee> employeeList = employeeRepository.findAll();
@@ -36,10 +37,10 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
     @Override
     public void deleteEmployee(int id) {
-      employeeRepository.findById(id).orElseThrow(
-              () -> new EmployeeServiceException("Cannot Delete Employee with ID: "+ id + ". Employee not found!")
-      );
-      employeeRepository.deleteById(id);
+        employeeRepository.findById(id).orElseThrow(
+                () -> new EmployeeServiceException("Cannot Delete Employee with ID: " + id + ". Employee not found!")
+        );
+        employeeRepository.deleteById(id);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
         List<Employee> employeeList =
                 employeeRepository.findAllBySurname(surname);
 
-        if(employeeList.isEmpty()) {
+        if (employeeList.isEmpty()) {
             throw new EmployeeServiceException("There are no Employees with SURNAME: " + surname);
         }
 
@@ -58,7 +59,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
     public List<Employee> findEmployeeSalaryLessThan(int salary) {
         List<Employee> employeeList = employeeRepository.findAllBySalaryLessThan(salary);
 
-        if(employeeList.isEmpty()) {
+        if (employeeList.isEmpty()) {
             throw new EmployeeServiceException("There is no Employee salary less then: " + salary);
         }
 

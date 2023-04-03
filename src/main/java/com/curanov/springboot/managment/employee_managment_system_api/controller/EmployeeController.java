@@ -2,10 +2,8 @@ package com.curanov.springboot.managment.employee_managment_system_api.controlle
 
 import com.curanov.springboot.managment.employee_managment_system_api.entity.Employee;
 import com.curanov.springboot.managment.employee_managment_system_api.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,18 +21,16 @@ public class EmployeeController {
 
     @GetMapping("/employees/{id}")
     public Employee showEmployee(@PathVariable int id) {
-        Employee employee =  employeeService.getEmployee(id);
-
-        return employee;
+        return employeeService.getEmployee(id);
     }
 
     @PostMapping("/employees")
-    public Employee saveEmployee(@RequestBody Employee employee) {
+    public Employee saveEmployee(@Valid @RequestBody Employee employee) {
         return employeeService.saveEmployee(employee);
     }
 
     @PutMapping("/employees")
-    public Employee updateEmployee(@RequestBody Employee employee) {
+    public Employee updateEmployee(@Valid @RequestBody Employee employee) {
         return employeeService.saveEmployee(employee);
     }
 
