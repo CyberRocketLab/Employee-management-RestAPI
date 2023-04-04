@@ -10,10 +10,6 @@ It provides endpoints for managing employees, such as creating, retrieving, upda
 - MySQL Database
 - Maven
 
-## Getting Started
-
-To get started with the project, you can clone the repository and run it locally.
-This will start the application on `http://localhost:8081`.
 
 ## API Endpoints
 
